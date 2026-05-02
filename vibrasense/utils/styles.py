@@ -19,6 +19,15 @@ def inject_css():
     }
     .stApp { background: #060912 !important; }
     .block-container { padding: 0 !important; max-width: 100% !important; }
+
+    /* ── Hide Streamlit top toolbar & eliminate header gap ───────────── */
+    [data-testid="stToolbar"],
+    [data-testid="stDecoration"],
+    [data-testid="stStatusWidget"],
+    #MainMenu,
+    header[data-testid="stHeader"] { visibility: hidden !important; height: 0 !important; }
+    .stApp > header { display: none !important; }
+    .appview-container .main .block-container { padding-top: 0 !important; }
     [data-testid="stSidebar"] {
         background: #08091a !important;
         border-right: 1px solid #1a2540 !important;
