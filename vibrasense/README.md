@@ -2,9 +2,9 @@
 
 **Industrial Vibration Analysis Dashboard for Oil & Gas Equipment**
 
-> Built by [SERHOUDJI](https://github.com/souhil_twelve) · Next-Generation Oil Field Solutions
+> Built by [FARES] · Next-Generation Oil Field Solutions
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://your-app.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]((https://vibrasense.streamlit.app/))
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.4-orange?logo=scikit-learn)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.32-red?logo=streamlit)
