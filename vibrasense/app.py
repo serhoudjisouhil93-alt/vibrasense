@@ -121,7 +121,7 @@ with st.sidebar:
     st.markdown("""
     <div class="sidebar-footer">
       <div>⚡ VIBRA·SENSE v2.0</div>
-      <div>SERHOUDJI · Next-Gen Oil Field Solutions</div>
+      <div>FARES · Next-Gen Oil Field Solutions</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -379,7 +379,7 @@ with gauge_col:
 st.markdown("""
 <div class="footer">
   <span>⚡ VIBRA·SENSE v2.0</span>
-  <span>SERHOUDJI · Next-Generation Oil Field Solutions</span>
+  <span>FARES · Next-Generation Oil Field Solutions</span>
   <span>Powered by Python · scikit-learn · Streamlit · Plotly</span>
 </div>
 """, unsafe_allow_html=True)
