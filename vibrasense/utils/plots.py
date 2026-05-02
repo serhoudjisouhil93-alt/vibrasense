@@ -8,6 +8,17 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 
+def hex_alpha(hex_color: str, alpha_hex: str) -> str:
+    """Convert a 6-digit hex color + 2-digit hex alpha to rgba() string.
+    This avoids 8-digit hex colors which are unsupported in older Plotly versions.
+    e.g. hex_alpha('#00ff88', '08') -> 'rgba(0,255,136,0.031)'
+    """
+    h = hex_color.lstrip("#")
+    r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+    a = round(int(alpha_hex, 16) / 255, 3)
+    return f"rgba({r},{g},{b},{a})"
+
+
 # ── Theme constants ─────────────────────────────────────────────────────────
 BG_COLOR     = "#060912"
 PANEL_COLOR  = "#0a0e1a"
@@ -60,7 +71,7 @@ def plot_time_domain(
     fig.add_trace(go.Scatter(
         x=np.concatenate([t_d, t_d[::-1]]),
         y=np.concatenate([s_d, -np.abs(s_d[::-1])]),
-        fill="toself", fillcolor=f"{color}08",
+        fill="toself", fillcolor=hex_alpha(color, "08"),
         line=dict(width=0), showlegend=False, hoverinfo="skip",
     ))
 
@@ -78,9 +89,9 @@ def plot_time_domain(
     for sign in [1, -1]:
         fig.add_hline(
             y=sign * rms_val,
-            line=dict(color=f"{color}55", width=1, dash="dot"),
+            line=dict(color=hex_alpha(color, "55"), width=1, dash="dot"),
             annotation_text=f"±RMS={rms_val:.3f}" if sign == 1 else "",
-            annotation_font=dict(size=9, color=f"{color}aa"),
+            annotation_font=dict(size=9, color=hex_alpha(color, "aa")),
         )
 
     layout = BASE_LAYOUT.copy()
@@ -126,7 +137,7 @@ def plot_fft_spectrum(
     # Spectrum fill
     fig.add_trace(go.Scatter(
         x=f_d, y=m_d,
-        fill="tozeroy", fillcolor=f"{color}15",
+        fill="tozeroy", fillcolor=hex_alpha(color, "15"),
         line=dict(color=color, width=1.5),
         name="FFT",
         hovertemplate="Freq=%{x:.1f}Hz<br>Mag=%{y:.4f}<extra></extra>",
@@ -138,9 +149,9 @@ def plot_fft_spectrum(
         if freq_harm <= max_freq:
             fig.add_vline(
                 x=freq_harm,
-                line=dict(color="#ffffff22", width=1, dash="dot"),
+                line=dict(color="rgba(255,255,255,0.133)", width=1, dash="dot"),
                 annotation_text=f"{n_harm}x" if n_harm <= 3 else "",
-                annotation_font=dict(size=8, color="#ffffff44"),
+                annotation_font=dict(size=8, color="rgba(255,255,255,0.267)"),
                 annotation_position="top",
             )
 
@@ -206,7 +217,7 @@ def plot_feature_radar(features: dict) -> go.Figure:
 
     fig.add_trace(go.Scatterpolar(
         r=values, theta=cats_closed,
-        fill="toself", fillcolor=f"{line_color}18",
+        fill="toself", fillcolor=hex_alpha(line_color, "18"),
         line=dict(color=line_color, width=2),
         name="Features",
         hovertemplate="%{theta}: %{r:.2f}<extra></extra>",
@@ -269,9 +280,9 @@ def plot_probability_gauge(prediction: dict) -> go.Figure:
             bgcolor=BG_COLOR,
             borderwidth=1, bordercolor=GRID_COLOR,
             steps=[
-                dict(range=[0, 35],  color="#ff224415"),
-                dict(range=[35, 65], color="#ffaa0015"),
-                dict(range=[65, 100],color="#00ff8815"),
+                dict(range=[0, 35],  color="rgba(255,34,68,0.082)"),
+                dict(range=[35, 65], color="rgba(255,170,0,0.082)"),
+                dict(range=[65, 100],color="rgba(0,255,136,0.082)"),
             ],
             threshold=dict(
                 line=dict(color="#ffffff", width=2),
